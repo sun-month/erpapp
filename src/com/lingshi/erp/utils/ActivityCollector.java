@@ -1,4 +1,4 @@
-package com.lingshi.erp.util;
+package com.lingshi.erp.utils;
 
 import java.util.ArrayList;
 import java.util.List;

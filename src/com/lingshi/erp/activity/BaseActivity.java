@@ -1,6 +1,6 @@
 package com.lingshi.erp.activity;
 
-import com.lingshi.erp.util.ActivityCollector;
+import com.lingshi.erp.utils.ActivityCollector;
 
 import android.app.Activity;
 import android.os.Bundle;
