@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lingshi.erp.R;
 import com.lingshi.erp.fragment.MessageFragment;
@@ -54,6 +55,8 @@ public class MainActivity extends FragmentActivity {
 			mTabHost.getTabWidget().getChildAt(i)
 					.setBackgroundResource(R.drawable.selector_tab_background);
 		}
+		Bundle extras = getIntent().getExtras();
+		Toast.makeText(this, extras.getString("username"), Toast.LENGTH_SHORT).show();
 	}
 
 	private View getTabContent(int index) {
