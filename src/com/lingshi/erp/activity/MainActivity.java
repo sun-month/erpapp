@@ -9,19 +9,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lingshi.erp.R;
-import com.lingshi.erp.fragment.MessageFragment;
 import com.lingshi.erp.fragment.ContactsFragment;
 import com.lingshi.erp.fragment.MeFragment;
+import com.lingshi.erp.fragment.MessageFragment;
 
 @SuppressLint("InflateParams")
 public class MainActivity extends FragmentActivity {
-
-	public static String USER_NAME = "admin";
-	public static String USER_CODE = "admin";
-	public static int USER_ID = 1;
 
 	private FragmentTabHost mTabHost;
 
@@ -48,15 +43,13 @@ public class MainActivity extends FragmentActivity {
 
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabconten);
-		for (int i = 0; i < mFragmentArray.length; i++) {
+		for (int i = 0; i < mFragmentArray.length; i++) {// 把fragment放进主界面中
 			TabSpec tabSpec = mTabHost.newTabSpec(mTextArray[i]).setIndicator(
 					getTabContent(i));
 			mTabHost.addTab(tabSpec, mFragmentArray[i], null);
 			mTabHost.getTabWidget().getChildAt(i)
 					.setBackgroundResource(R.drawable.selector_tab_background);
 		}
-		Bundle extras = getIntent().getExtras();
-		Toast.makeText(this, extras.getString("username"), Toast.LENGTH_SHORT).show();
 	}
 
 	private View getTabContent(int index) {

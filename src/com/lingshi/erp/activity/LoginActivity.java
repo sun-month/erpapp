@@ -1,6 +1,13 @@
 package com.lingshi.erp.activity;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +22,48 @@ import com.lingshi.erp.utils.APIUtil;
 import com.lingshi.erp.utils.MD5Util;
 import com.lingshi.erp.web.ServiceBus;
 
+@SuppressLint("HandlerLeak")
 public class LoginActivity extends BaseActivity implements OnClickListener {
+
+	public static final int SUCCESS_MSG = 1;
+	public static final int ERROR_MSG = 0;
 
 	private EditText accountEdit;
 	private EditText passwordEdit;
 	private Button loginButton;
+
+	private Handler handler = new Handler() {
+		@SuppressWarnings("unchecked")
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case SUCCESS_MSG:
+				Map<String, Object> map = (Map<String, Object>) msg.obj;
+				if (map.isEmpty()) {
+					Toast.makeText(LoginActivity.this, "用户名或密码错误！",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
+				Bundle bundle = new Bundle();
+				Iterator<Entry<String, Object>> it = map.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry<String, Object> entry = it.next();
+					bundle.putString(entry.getKey(), entry.getValue()
+							.toString());
+				}
+				actionStart(LoginActivity.this, MainActivity.class, bundle);
+				finish();
+				break;
+			case ERROR_MSG:
+				Toast.makeText(LoginActivity.this, "网络连接异常", Toast.LENGTH_SHORT)
+						.show();
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,74 +87,30 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					return;
 				}
 
-				// String url =
-				// "http://192.168.1.18:8080/lingshi/loginAction_login.action";
 				ServiceBus bus = new ServiceBus();
 				bus.setService("loginAction_login");
 				bus.getInMap().put("username", account);
 				bus.getInMap().put("password", password);
 				APIUtil.invoke(bus, new RequestCallback() {
-
+					// 返回值发送到handler处理
 					@Override
 					public void success(ServiceBus bus) {
-						// 处理返回结果，判断用户名密码是否正确
-						Toast.makeText(LoginActivity.this,
-								bus.getOutMap().toString(), Toast.LENGTH_SHORT)
-								.show();
-						Log.e("LoginActivity", bus.toString());
+						Log.e(getPackageName(), bus.getInMap().toString());
+						Message msg = new Message();
+						msg.what = SUCCESS_MSG;
+						msg.obj = bus.getOutMap();
+						handler.sendMessage(msg);
 					}
 
 					@Override
 					public void error(String msg) {
-						Toast.makeText(LoginActivity.this, "http连接错误",
-								Toast.LENGTH_SHORT).show();
-						Log.e("LoginActivity", msg);
+						Log.e(getPackageName(), msg);
+
+						Message message = new Message();
+						message.what = ERROR_MSG;
+						handler.sendMessage(message);
 					}
 				});
-				// HttpUtils http = new HttpUtils();
-				// RequestParams params = new RequestParams();
-				// params.addQueryStringParameter("user", account);
-				// params.addQueryStringParameter("password", password);
-				//
-				// http.send(HttpRequest.HttpMethod.POST, url, params,
-				// new RequestCallBack() {
-				//
-				// @Override
-				// public void onFailure(HttpException error,
-				// String msg) {
-				// Toast.makeText(LoginActivity.this, "http链接异常！",
-				// Toast.LENGTH_SHORT).show();
-				// Log.e(getLocalClassName(), msg);
-				// }
-				//
-				// @Override
-				// public void onSuccess(ResponseInfo response) {
-				// try {
-				// Object result = response.result;
-				// Toast.makeText(LoginActivity.this,
-				// "result is " + result,
-				// Toast.LENGTH_SHORT).show();
-				// JSONObject object = new JSONObject(result
-				// .toString());
-				// // 待跳转
-				// Intent intent = new Intent(
-				// LoginActivity.this,
-				// MainActivity.class);
-				// Bundle extras = new Bundle();
-				// extras.putString("username",
-				// object.getString("name_f"));
-				// extras.putString("usercode",
-				// object.getString("code_f"));
-				// extras.putInt("userid",
-				// object.getInt("id_f"));
-				// intent.putExtras(extras);
-				// startActivity(intent);
-				// finish();
-				// } catch (JSONException e) {
-				// e.printStackTrace();
-				// }
-				// }
-				// });
 
 			} catch (Exception e) {
 				e.printStackTrace();

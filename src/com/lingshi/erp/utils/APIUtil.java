@@ -1,10 +1,6 @@
 package com.lingshi.erp.utils;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,14 +32,15 @@ public class APIUtil {
 					connection.setReadTimeout(5000);
 					connection.setDoInput(true);
 					connection.setDoOutput(true);
+					byte[] bs = ZipUtil.zipdata(bus.ToXML());
 					// 声明式压缩数据
 					connection.setRequestProperty("Content-Type",
 							CONTENT_TYPE_ZIP_DATA);
-					connection.setRequestProperty("Content-Length", String
-							.valueOf(ZipUtil.zipdata(bus.toString()).length));
+					connection.setRequestProperty("Content-Length",
+							String.valueOf(bs.length));
 
 					OutputStream out = connection.getOutputStream();
-					out.write(ZipUtil.zipdata(bus.toString()));
+					out.write(bs);
 
 					int responseCode = connection.getResponseCode();
 					if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -54,15 +51,17 @@ public class APIUtil {
 						Document document = Dom4jUtil
 								.readXmlToDocument(unzipdata);
 						rspBus.FromXML(document.getRootElement());
-						callback.success(rspBus);
+						if (callback != null) {
+							callback.success(rspBus);
+						}
 					}
 
 				} catch (Exception e) {
-					callback.error(e.getMessage());
+					if (callback != null)
+						callback.error(e.getMessage());
 				} finally {
-					if (connection != null) {
+					if (connection != null)
 						connection.disconnect();
-					}
 				}
 			}
 		}).start();
