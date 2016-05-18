@@ -5,8 +5,6 @@ import java.security.MessageDigest;
 /**
  * ≤…”√MD5º”√‹
  * 
- * @author Xingxing,Xie
- * @datetime 2014-5-31
  */
 public class MD5Util {
 	/***

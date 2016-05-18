@@ -5,20 +5,24 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lingshi.erp.R;
 import com.lingshi.erp.callback.RequestCallback;
 import com.lingshi.erp.utils.APIUtil;
+import com.lingshi.erp.utils.DBUtil;
 import com.lingshi.erp.utils.MD5Util;
 import com.lingshi.erp.web.ServiceBus;
 
@@ -52,6 +56,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 							.toString());
 				}
 				actionStart(LoginActivity.this, MainActivity.class, bundle);
+
+				if (checkBox.isChecked()) {
+					checkBox.setChecked(false);
+					Editable text = passwordEdit.getText();
+					map.put("password_f", text);
+					save(map);// 保存用户相关信息
+				}
+
 				finish();
 				break;
 			case ERROR_MSG:
@@ -64,6 +76,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			}
 		};
 	};
+	private DBUtil dbUtil;
+	private CheckBox checkBox;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +86,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		accountEdit = (EditText) findViewById(R.id.account);
 		passwordEdit = (EditText) findViewById(R.id.password);
 		loginButton = (Button) findViewById(R.id.login);
+		checkBox = (CheckBox) findViewById(R.id.check_box);
 		loginButton.setOnClickListener(this);
+		load();
+	}
+
+	private void load() {
+		// dbUtil = DBUtil.getInstance(this, "erpapp.db", 1);
+		// dbUtil.queryForMap("t_user", null, "id_f=?", new String[] { "1" });
 	}
 
 	@Override
@@ -117,6 +138,20 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
+	}
+
+	private void save(Map<String, Object> map) {
+		if (map.isEmpty())
+			return;
+
+		dbUtil = DBUtil.getInstance(this, "erpapp.db", 1);
+		Iterator<Entry<String, Object>> it = map.entrySet().iterator();
+		ContentValues values = new ContentValues();
+		while (it.hasNext()) {
+			Entry<String, Object> entry = it.next();
+			values.put(entry.getKey(), entry.getValue().toString());
+		}
+		dbUtil.insert("t_user", null, values);
 	}
 
 }
