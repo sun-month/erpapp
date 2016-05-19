@@ -1,6 +1,8 @@
 package com.lingshi.erp.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.content.ContentValues;
@@ -8,7 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.CancellationSignal;
 import android.util.Log;
 
 public class DBUtil {
@@ -68,50 +69,64 @@ public class DBUtil {
 				conflictAlgorithm);
 	}
 
-	public Map<String, Object> queryForMap(boolean distinct, String table,
-			String[] columns, String selection, String[] selectionArgs,
-			String groupBy, String having, String orderBy, String limit,
-			CancellationSignal cancellationSignal) {
-		Cursor cursor = db.query(distinct, table, columns, selection,
-				selectionArgs, groupBy, having, orderBy, limit,
-				cancellationSignal);
-
-		return parseCursor(cursor);
-	}
-
 	public Map<String, Object> queryForMap(String table, String[] columns,
-			String selection, String[] selectionArgs) {
-		Cursor cursor = db.query(table, columns, selection, selectionArgs,
-				null, null, null);
+			String selection, String[] selectionArgs, String groupBy,
+			String having, String orderBy, String limit) {
 
+		return queryForListMap(table, columns, selection, selectionArgs,
+				groupBy, having, orderBy, limit).get(0);
+	}
+
+	public List<Map<String, Object>> queryForListMap(String table,
+			String[] columns, String selection, String[] selectionArgs,
+			String groupBy, String having, String orderBy, String limit) {
+		Cursor cursor = db.query(table, columns, selection, selectionArgs,
+				groupBy, having, orderBy, limit);
 		return parseCursor(cursor);
 
 	}
 
-	private Map<String, Object> parseCursor(Cursor cursor) {
-		if (cursor == null)
+	private List<Map<String, Object>> parseCursor(Cursor cursor) {
+		if (!cursor.moveToFirst())
 			return null;
-		Map<String, Object> map = new HashMap<String, Object>();
-		while (cursor.moveToNext()) {
-			String[] columnNames = cursor.getColumnNames();
-			for (int i = 0; i < columnNames.length; i++) {
-				String key = columnNames[i];
-				String value = cursor.getString(i + 1);
-				map.put(key, value);
-			}
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if (cursor.moveToFirst()) {
+			do {
+				Map<String, Object> map = new HashMap<String, Object>();
+				String[] columnNames = cursor.getColumnNames();
+				for (int i = 0; i < columnNames.length; i++) {
+					String key = columnNames[i];
+					String value = cursor.getString(cursor.getColumnIndex(key));
+					map.put(key, value);
+				}
+				list.add(map);
+			} while (cursor.moveToNext());
 		}
-		return map;
+		cursor.close();
+		return list;
 	}
 
+	/**
+	 * 要求values必须要有id_f字段
+	 * 
+	 * @param table
+	 * @param nullColumnHack
+	 * @param values
+	 */
 	public void saveOrUpdate(String table, String nullColumnHack,
-			ContentValues values, String whereClause, String[] whereArgs) {
+			ContentValues values) {
 		// 根据id_f查找表中是否存在数据
+		Cursor cursor = db.query(table, new String[] { "id_f" }, "id_f=?",
+				new String[] { values.get("id_f").toString() }, null, null,
+				null);
 		// 如果存在，则更新
-
-		// 如果不存在，则插入
-
-		db.insert(table, nullColumnHack, values);
-		db.update(table, values, whereClause, whereArgs);
+		if (cursor.getCount() != 0) {
+			db.update(table, values, "id_f=?", new String[] { values
+					.get("id_f").toString() });
+		} else {
+			// 如果不存在，则插入
+			db.insert(table, nullColumnHack, values);
+		}
 	}
 
 	public void update(String sql, Object[] objects) {

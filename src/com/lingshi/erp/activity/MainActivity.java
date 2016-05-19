@@ -2,6 +2,9 @@ package com.lingshi.erp.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -36,11 +39,11 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
+		Fragment meFragment = getSupportFragmentManager().findFragmentById(R.layout.me_fragment);
 	}
 
 	private void initView() {
 		mlayoutInflater = LayoutInflater.from(this);
-
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabconten);
 		for (int i = 0; i < mFragmentArray.length; i++) {// 把fragment放进主界面中

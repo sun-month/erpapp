@@ -12,6 +12,9 @@ import com.lingshi.erp.web.ServiceBus;
 
 public class APIUtil {
 
+	public static final int SUCCESS_MSG = 1;
+	public static final int ERROR_MSG = 0;
+	
 	public static final String CONTENT_TYPE_ZIP_DATA = "zip/data";
 
 	public static final String SERVER = "http://192.168.1.18:8080/lingshi/";

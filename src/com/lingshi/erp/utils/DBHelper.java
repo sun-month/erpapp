@@ -21,7 +21,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		switch (oldVersion) {
+		case 1:
+			String alter_createtime = "alter table t_user add column createtime_f real";// 增加字段createtime
+			db.execSQL(alter_createtime);
+			String alter_isremember = "alter table t_user add column isremember_f integer ";// 增加字段是否记住密码
+			db.execSQL(alter_isremember);
 
+		default:
+			break;
+		}
 	}
 
 }
