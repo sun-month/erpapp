@@ -2,8 +2,6 @@ package com.lingshi.erp.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -34,12 +32,20 @@ public class MainActivity extends FragmentActivity {
 
 	private String[] mTextArray = { "消息", "联系人", "我" };
 
+	private Fragment meFragment;
+
+	private Fragment messageFragment;
+
+	private Fragment contactsFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
-		Fragment meFragment = getSupportFragmentManager().findFragmentById(R.layout.me_fragment);
+		meFragment = getSupportFragmentManager().findFragmentById(R.layout.me_fragment);
+		messageFragment = getSupportFragmentManager().findFragmentById(R.layout.message_fragment);
+		contactsFragment = getSupportFragmentManager().findFragmentById(R.layout.contacts_fragment);
 	}
 
 	private void initView() {

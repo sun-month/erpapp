@@ -140,7 +140,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		if (map.isEmpty())
 			return;
 
-		dbUtil = DBUtil.getInstance(this, "erpapp.db", 2);
+		dbUtil = DBUtil.getInstance(this, "erpapp.db", 1);
 		Iterator<Entry<String, Object>> it = map.entrySet().iterator();
 		ContentValues values = new ContentValues();
 		values.put("createtime_f", System.currentTimeMillis());// 记录用户登录时间
@@ -152,12 +152,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void load() {
-		dbUtil = DBUtil.getInstance(this, "erpapp.db", 2);
+		dbUtil = DBUtil.getInstance(this, "erpapp.db", 1);
 		// 查询前端sqlite，以createtime_f作为最先登录时间，最大的就是上次登录用户。
 		Map<String, Object> map = dbUtil.queryForMap("t_user", new String[] {
 				"code_f", "password_f", "isremember_f" }, null, null, null,
 				null, "createtime_f desc", "1");
-		if (map.isEmpty()) {
+		if (map == null) {
 			return;
 		}
 		String isremember_f = null;

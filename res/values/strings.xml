@@ -14,5 +14,7 @@
     <string name="second_fragment">Second Fragment</string>
     <string name="third_fragment">Third Fragment</string>
     <string name="remember">记住密码</string>
+    <string name="update_password">修改密码</string>
+    <string name="logout_user">注销用户</string>
 
 </resources>

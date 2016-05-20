@@ -11,9 +11,17 @@ import com.lingshi.erp.R;
 
 @SuppressLint("InflateParams")
 public class MeFragment extends Fragment {
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.me_fragment, null);
+		View view = inflater.inflate(R.layout.me_fragment, null);
+
+		return view;
+	}
+	
+	public void refresh(){
+		
 	}
 }

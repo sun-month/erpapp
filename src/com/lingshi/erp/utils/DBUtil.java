@@ -72,9 +72,9 @@ public class DBUtil {
 	public Map<String, Object> queryForMap(String table, String[] columns,
 			String selection, String[] selectionArgs, String groupBy,
 			String having, String orderBy, String limit) {
-
-		return queryForListMap(table, columns, selection, selectionArgs,
-				groupBy, having, orderBy, limit).get(0);
+		List<Map<String, Object>> list = queryForListMap(table, columns,
+				selection, selectionArgs, groupBy, having, orderBy, limit);
+		return list == null ? null : list.get(0);
 	}
 
 	public List<Map<String, Object>> queryForListMap(String table,
