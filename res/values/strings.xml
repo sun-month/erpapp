@@ -16,5 +16,9 @@
     <string name="remember">记住密码</string>
     <string name="update_password">修改密码</string>
     <string name="logout_user">注销用户</string>
+    <string name="clearup_chat_record">清除聊天记录</string>
+    <string name="ignore_warning">Ignore Warning!</string>
+    <string name="use_guide">使用帮助</string>
+    <string name="about">关于ERP</string>
 
 </resources>
