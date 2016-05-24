@@ -21,7 +21,15 @@
     <string name="use_guide">使用帮助</string>
     <string name="about">关于ERP</string>
     <string name="person_info">个人信息</string>
+    <string name="normal">通用</string>
+    <string name="message_notify">消息通知</string>
+    <string name="personal">隐私</string>
+    <string name="chat_number">账号：xxx</string>
+    <string name="place_holder">xxx</string>
+    <string name="head">头像</string>
+    <string name="name">名字</string>
+    <string name="code">账号</string>
     <string name="code_2d">我的二维码</string>
-    <string name="upload_head">上传头像</string>
+    <string name="me">我</string>
 
 </resources>
