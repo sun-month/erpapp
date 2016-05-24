@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">erpapp</string>
+    <string name="app_name">erpchat</string>
     <string name="hello_world">Hello world!</string>
     <string name="login">Login</string>
     <string name="account">用户名:</string>
@@ -20,5 +20,8 @@
     <string name="ignore_warning">Ignore Warning!</string>
     <string name="use_guide">使用帮助</string>
     <string name="about">关于ERP</string>
+    <string name="person_info">个人信息</string>
+    <string name="code_2d">我的二维码</string>
+    <string name="upload_head">上传头像</string>
 
 </resources>
