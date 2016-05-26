@@ -71,4 +71,5 @@ public class MainActivity extends FragmentActivity {
 		text.setText(mTextArray[index]);
 		return view;
 	}
+
 }

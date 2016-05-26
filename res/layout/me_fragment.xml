@@ -26,6 +26,7 @@
         android:padding="5dp" >
 
         <RelativeLayout
+            android:id="@+id/personal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/single_me_item"

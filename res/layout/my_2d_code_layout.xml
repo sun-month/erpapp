@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="#1f212d"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -36,27 +36,67 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/personal_head"
+            android:text="@string/my_2d_code"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:contentDescription="@string/ignore_warning"
+            android:padding="10dp"
             android:src="@drawable/title_menu_item" />
     </RelativeLayout>
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/ignore_warning"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:padding="15dp" >
+
+        <ImageView
+            android:id="@+id/image_view_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/ignore_warning"
+            android:padding="5dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/image_view_me"
+            android:layout_toRightOf="@+id/image_view_me"
+            android:paddingTop="15dp"
+            android:text="@string/place_holder"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/image_view_2d_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_view_me"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/ignore_warning"
+            android:padding="10dp"
+            android:src="@drawable/my_2d_code" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_me"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+           	android:layout_below="@+id/image_view_2d_code" />
+    </RelativeLayout>
 
 </LinearLayout>
