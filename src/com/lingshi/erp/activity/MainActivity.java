@@ -2,7 +2,6 @@ package com.lingshi.erp.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -33,11 +32,11 @@ public class MainActivity extends FragmentActivity {
 
 	private String[] mTextArray = { "消息", "联系人", "我" };
 
-	private Fragment meFragment; 
-
-	private Fragment messageFragment;
-
-	private Fragment contactsFragment;
+//	private Fragment meFragment; 
+//
+//	private Fragment messageFragment;
+//
+//	private Fragment contactsFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,9 @@ public class MainActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		initView();
-		meFragment = getSupportFragmentManager().findFragmentById(R.layout.me_fragment);
-		messageFragment = getSupportFragmentManager().findFragmentById(R.layout.message_fragment);
-		contactsFragment = getSupportFragmentManager().findFragmentById(R.layout.contacts_fragment);
+//		meFragment = getSupportFragmentManager().findFragmentById(R.layout.me_fragment);
+//		messageFragment = getSupportFragmentManager().findFragmentById(R.layout.message_fragment);
+//		contactsFragment = getSupportFragmentManager().findFragmentById(R.layout.contacts_fragment);
 	}
 
 	private void initView() {

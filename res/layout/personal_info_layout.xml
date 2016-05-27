@@ -9,27 +9,37 @@
         android:layout_height="45dp"
         android:background="@drawable/title_bar" >
 
-        <ImageView
-            android:id="@+id/image_view_return"
+        <RelativeLayout
+            android:id="@+id/return_exe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:contentDescription="@string/ignore_warning"
-            android:paddingEnd="1dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="1dp"
-            android:paddingStart="10dp"
-            android:src="@drawable/left" />
+            android:background="@drawable/return_bar_item"
+            android:clickable="true"
+            android:padding="5dp" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/image_view_return"
-            android:layout_toRightOf="@+id/image_view_return"
-            android:text="@string/me"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/image_view_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/ignore_warning"
+                android:paddingEnd="1dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="1dp"
+                android:paddingStart="10dp"
+                android:src="@drawable/left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/image_view_return"
+                android:layout_toRightOf="@+id/image_view_return"
+                android:text="@string/me"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,6 +58,7 @@
         android:padding="5dp" >
 
         <RelativeLayout
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/top_me_item"

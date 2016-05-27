@@ -7,8 +7,8 @@ import java.net.URL;
 
 import org.dom4j.Document;
 
+import com.lingshi.erp.bean.ServiceBus;
 import com.lingshi.erp.callback.RequestCallback;
-import com.lingshi.erp.web.ServiceBus;
 
 public class APIUtil {
 

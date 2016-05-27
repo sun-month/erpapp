@@ -10,27 +10,37 @@
         android:layout_height="45dp"
         android:background="@drawable/title_bar" >
 
-        <ImageView
-            android:id="@+id/image_view_return"
+        <RelativeLayout
+            android:id="@+id/return_exe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:contentDescription="@string/ignore_warning"
-            android:paddingEnd="1dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="1dp"
-            android:paddingStart="10dp"
-            android:src="@drawable/left" />
+            android:background="@drawable/return_bar_item"
+            android:clickable="true"
+            android:padding="5dp" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/image_view_return"
-            android:layout_toRightOf="@+id/image_view_return"
-            android:text="@string/person_info"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/image_view_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/ignore_warning"
+                android:paddingEnd="1dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="1dp"
+                android:paddingStart="10dp"
+                android:src="@drawable/left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/image_view_return"
+                android:layout_toRightOf="@+id/image_view_return"
+                android:text="@string/person_info"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,23 +50,24 @@
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:contentDescription="@string/ignore_warning"
+            android:padding="10dp"
+            android:background="#00BBCCDD"
             android:src="@drawable/title_menu_item" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/ignore_warning"
-        android:layout_marginTop="15dp"
         android:layout_marginBottom="50dp"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/ignore_warning"
         android:src="@drawable/ic_launcher" />
 
 </LinearLayout>

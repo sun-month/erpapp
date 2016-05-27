@@ -1,8 +1,6 @@
 package com.lingshi.erp.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,13 +20,4 @@ public class BaseActivity extends Activity {
 		ActivityCollector.removeActivity(this);
 	}
 
-	@SuppressWarnings("rawtypes")
-	protected void actionStart(Context origin, Class target,
-			Bundle bundle) {
-		Intent intent = new Intent(origin, target);
-		if (!bundle.isEmpty())
-			intent.putExtras(bundle);
-		startActivity(intent);
-		finish();
-	}
 }

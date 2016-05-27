@@ -20,11 +20,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lingshi.erp.R;
+import com.lingshi.erp.bean.ServiceBus;
 import com.lingshi.erp.callback.RequestCallback;
 import com.lingshi.erp.utils.APIUtil;
 import com.lingshi.erp.utils.DBUtil;
+import com.lingshi.erp.utils.IntentUtil;
 import com.lingshi.erp.utils.MD5Util;
-import com.lingshi.erp.web.ServiceBus;
 
 @SuppressLint("HandlerLeak")
 public class LoginActivity extends BaseActivity implements OnClickListener {
@@ -55,7 +56,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					bundle.putString(entry.getKey(), entry.getValue()
 							.toString());
 				}
-				actionStart(LoginActivity.this, MainActivity.class, bundle);
+				IntentUtil.actionStart(LoginActivity.this, MainActivity.class);
 
 				if (checkBox.isChecked()) {
 					checkBox.setChecked(false);

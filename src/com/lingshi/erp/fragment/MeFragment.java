@@ -1,7 +1,6 @@
 package com.lingshi.erp.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.lingshi.erp.R;
-import com.lingshi.erp.activity.MainActivity;
 import com.lingshi.erp.activity.PersonalInfoActivity;
+import com.lingshi.erp.utils.IntentUtil;
 
 @SuppressLint("InflateParams")
 public class MeFragment extends Fragment implements OnClickListener {
@@ -32,7 +31,9 @@ public class MeFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (R.id.personal == v.getId()) {
-			//跳转界面未实现，怎么获取 context？
+			IntentUtil.actionStart(getContext(), PersonalInfoActivity.class);
+			getActivity().overridePendingTransition(R.anim.pull_in_right,
+					R.anim.push_out_left);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package com.lingshi.erp.callback;
 
-import com.lingshi.erp.web.ServiceBus;
+import com.lingshi.erp.bean.ServiceBus;
 
 public interface RequestCallback {
 	

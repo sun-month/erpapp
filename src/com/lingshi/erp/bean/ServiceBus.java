@@ -1,4 +1,4 @@
-package com.lingshi.erp.web;
+package com.lingshi.erp.bean;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
