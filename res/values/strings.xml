@@ -37,5 +37,6 @@
     <string name="new_name">新的名字</string>
     <string name="my_2d_code">我的二维码</string>
     <string name="add_me">扫一扫二维码，加我微信</string>
+    <string name="contacts">联系人</string>
 
 </resources>
